@@ -1,0 +1,27 @@
+
+server:
+  port: 4006
+
+spring:
+  application:
+    name: lzj-gateway
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: lzj-banner
+          uri: lb://lzj-banner
+          predicates:
+            - Path=/banner/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # ip:port
+  client:
+    service-url:
+      defaultZone: http://192.168.10.102:8761/eureka/

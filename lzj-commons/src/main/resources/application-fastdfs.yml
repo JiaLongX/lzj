@@ -1,0 +1,5 @@
+# fastdfs storage 的 nginx 代理服务器地址
+fastdfs:
+  storage:
+    nginx:
+      prefix: http://192.168.10.100:8888/

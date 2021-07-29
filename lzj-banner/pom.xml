@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>lzj</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>lzj-banner</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>lzj-banner</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>lzj-mongodb</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>lzj-commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.34.1</version>
+                <!-- 全局配置 -->
+                <configuration>
+                    <!-- 配置远程 docker 守护进程 url -->
+                    <dockerHost>http://192.168.10.102:2375</dockerHost>
+                    <!-- 认证配置，用于私有 registry 认证 -->
+                    <!--
+                        <authConfig>
+                            <username>admin</username>
+                            <password>123456</password>
+                        </authConfig>
+                        -->
+                    <!-- 镜像相关配置，支持多镜像 -->
+                    <images>
+                        <!-- 单个镜像配置 -->
+                        <image>
+                            <!-- 镜像名(含版本号) -->
+                            <name>lzj/${project.name}:latest</name>
+                            <!-- <name>lzj/${project.name}:${project.version}</name> -->
+                            <!-- registry 地址，用于推送/拉取镜像 -->
+                            <registry>192.168.10.102:5000</registry>
+                            <!-- 镜像 build 相关配置 -->
+                            <build>
+                                <!-- 使用 Dockerfile 文件，默认地址是 src/main/docker -->
+                                <dockerFile>Dockerfile</dockerFile>
+                                <!-- 从项目根路径开始找 lzj-eureka/docker -->
+                                <!-- <dockerFile>${project.basedir}/docker/Dockerfile</dockerFile> -->
+                                <!--
+                                        将 jar 包拷贝到 docker build 目录中
+                                        配置项说明：http://maven.fabric8.io/#build-assembly-descriptor
+                                    -->
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
