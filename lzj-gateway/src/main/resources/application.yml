@@ -17,7 +17,47 @@ spring:
           uri: lb://lzj-banner
           predicates:
             - Path=/banner/**
-
+        - id: lzj-hot-product
+          uri: lb://lzj-hot-product
+          predicates:
+            - Path=/hotProduct/**
+            - Query=city
+        - id: lzj-recommendation
+          uri: lb://lzj-recommendation
+          predicates:
+            - Path=/recommendation/**
+            - Query=city
+        - id: lzj-search
+          uri: lb://lzj-search
+          predicates:
+            - Path=/search/**
+            - Query=city
+            - Query=content
+            - Query=page
+        - id: lzj-product-details
+          uri: lb://lzj-product-details
+          predicates:
+            - Path=/details/**
+            - Query=id
+        - id: lzj-comment
+          uri: lb://lzj-comment
+          predicates:
+            - Path=/comment/**
+            - Query=id
+            - Query=page
+        - id: lzj-buytime
+          uri: lb://lzj-buytime
+          predicates:
+            - Path=/buytime/**
+            - Query=id
+        - id: lzj-sendyzm
+          uri: lb://lzj-sendyzm
+          predicates:
+            - Path=/sendyzm/**
+        - id: lzj-login
+          uri: lb://lzj-login
+          predicates:
+            - Path=/login/**
 eureka:
   instance:
     prefer-ip-address: true

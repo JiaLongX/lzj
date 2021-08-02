@@ -1,0 +1,19 @@
+server:
+  port: 7010
+
+spring:
+  application:
+    name: lzj-search
+  profiles:
+    active: mongodb, fastdfs
+  elasticsearch:
+    rest:
+      uris: http://192.168.10.100:9200
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # ip:port
+  client:
+    service-url:
+      defaultZone: http://192.168.10.102:8761/eureka/

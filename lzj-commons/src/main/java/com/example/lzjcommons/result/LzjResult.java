@@ -19,6 +19,9 @@ public class LzjResult implements Serializable {
     private Object data;
     // 提示消息。Banner轮播使用时，用于查询错误时返回提示信息
     private String msg;
+    // 是否还有更多内容
+    private boolean hasMore;
+    private Object time;
 
     // 成功返回的对象
     public static LzjResult success() {

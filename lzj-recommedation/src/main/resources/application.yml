@@ -1,0 +1,16 @@
+server:
+  port: 7090
+
+spring:
+  application:
+    name: lzj-recommendation
+  profiles:
+    active: mongodb, fastdfs
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # ip:port
+  client:
+    service-url:
+      defaultZone: http://192.168.10.102:8761/eureka/

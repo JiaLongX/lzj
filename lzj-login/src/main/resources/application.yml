@@ -1,0 +1,25 @@
+server:
+  port: 7060
+
+spring:
+  application:
+    name: lzj-login
+  profiles:
+    active: mongodb
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # ip:port
+  client:
+    service-url:
+      defaultZone: http://192.168.10.102:8761/eureka/
+
+# Feign 开启 Hystrix 支持
+feign:
+  hystrix:
+    enabled: true
+
+ribbon:
+  ConnectTimeout: 5000 # 请求连接的超时时间 默认的时间为 1 秒
+  ReadTimeout: 5000    # 请求处理的超时时间

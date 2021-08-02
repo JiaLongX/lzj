@@ -1,0 +1,16 @@
+server:
+  port: 7050
+
+spring:
+  application:
+    name: lzj-sendyzm
+  profiles:
+    active: redis
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # ip:port
+  client:
+    service-url:
+      defaultZone: http://192.168.10.102:8761/eureka/
